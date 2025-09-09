@@ -1,0 +1,52 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using OnlineEducation.Business.Abstract;
+using OnlineEducation.DTO.DTOs.CourseDtos;
+using OnlineEducation.DTO.DTOs.CourseCategoryDtos;
+using OnlineEducation.Entity.Entities;
+
+namespace OnlineEducation.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CoursesController(IGenericService<Course> _courseService, IMapper _mapper) : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var values = _courseService.TGetList();
+            return Ok(values);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var value = _courseService.TGetById(id);
+            return Ok(value);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _courseService.TDelete(id);
+            return Ok("Course entitiy deleted");
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateCourseDto createCourseDto)
+        {
+            var newValue = _mapper.Map<Course>(createCourseDto);
+            _courseService.TCreate(newValue);
+            return Ok("Course entitiy created");
+        }
+
+        [HttpPut]
+        public IActionResult Update(UpdateCourseDto updateCourseDto)
+        {
+            var values = _mapper.Map<Course>(updateCourseDto);
+            _courseService.TUpdate(values);
+            return Ok("Course entitiy updated");
+        }
+    }
+}

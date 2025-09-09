@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineEducation.DataAccess.Context;
 
@@ -11,9 +12,11 @@ using OnlineEducation.DataAccess.Context;
 namespace OnlineEducation.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineEducationContext))]
-    partial class OnlineEducationContextModelSnapshot : ModelSnapshot
+    [Migration("20250909190036_mig_initial")]
+    partial class mig_initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,6 +177,9 @@ namespace OnlineEducation.DataAccess.Migrations
                     b.Property<int>("CourseCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CourseId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("CourseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -191,6 +197,8 @@ namespace OnlineEducation.DataAccess.Migrations
                     b.HasKey("CourseId");
 
                     b.HasIndex("CourseCategoryId");
+
+                    b.HasIndex("CourseId1");
 
                     b.ToTable("Courses");
                 });
@@ -340,12 +348,21 @@ namespace OnlineEducation.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OnlineEducation.Entity.Entities.Course", null)
+                        .WithMany("Courses")
+                        .HasForeignKey("CourseId1");
+
                     b.Navigation("CourseCategory");
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.BlogCategory", b =>
                 {
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("OnlineEducation.Entity.Entities.Course", b =>
+                {
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.CourseCategory", b =>

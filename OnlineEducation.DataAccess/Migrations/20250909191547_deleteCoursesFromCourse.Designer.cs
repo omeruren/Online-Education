@@ -12,8 +12,8 @@ using OnlineEducation.DataAccess.Context;
 namespace OnlineEducation.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineEducationContext))]
-    [Migration("20250909064812_mig_initial")]
-    partial class mig_initial
+    [Migration("20250909191547_deleteCoursesFromCourse")]
+    partial class deleteCoursesFromCourse
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,9 +177,6 @@ namespace OnlineEducation.DataAccess.Migrations
                     b.Property<int>("CourseCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CourseId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("CourseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -197,8 +194,6 @@ namespace OnlineEducation.DataAccess.Migrations
                     b.HasKey("CourseId");
 
                     b.HasIndex("CourseCategoryId");
-
-                    b.HasIndex("CourseId1");
 
                     b.ToTable("Courses");
                 });
@@ -343,14 +338,10 @@ namespace OnlineEducation.DataAccess.Migrations
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Course", b =>
                 {
                     b.HasOne("OnlineEducation.Entity.Entities.CourseCategory", "CourseCategory")
-                        .WithMany()
+                        .WithMany("Courses")
                         .HasForeignKey("CourseCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("OnlineEducation.Entity.Entities.Course", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("CourseId1");
 
                     b.Navigation("CourseCategory");
                 });
@@ -360,7 +351,7 @@ namespace OnlineEducation.DataAccess.Migrations
                     b.Navigation("Blogs");
                 });
 
-            modelBuilder.Entity("OnlineEducation.Entity.Entities.Course", b =>
+            modelBuilder.Entity("OnlineEducation.Entity.Entities.CourseCategory", b =>
                 {
                     b.Navigation("Courses");
                 });
