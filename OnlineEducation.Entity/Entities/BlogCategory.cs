@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OnlineEducation.Entity.Entities
 {
-    internal class BlogCategory
+    public class BlogCategory
     {
+        public int BlogCategoryId { get; set; }
+        public string Name { get; set; }
+        public List<Blog> Blogs { get; set; }
     }
 }
