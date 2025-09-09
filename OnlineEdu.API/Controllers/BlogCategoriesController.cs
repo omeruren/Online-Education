@@ -1,0 +1,51 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using OnlineEducation.Business.Abstract;
+using OnlineEducation.DTO.DTOs.BlogCategoryDtos;
+using OnlineEducation.Entity.Entities;
+
+namespace OnlineEducation.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BlogCategoriesController(IGenericService<BlogCategory> _blogCategory, IMapper _mapper) : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var values = _blogCategory.TGetList();
+            return Ok(values);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var value = _blogCategory.TGetById(id);
+            return Ok(value);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _blogCategory.TDelete(id);
+            return Ok("BlogCategory entitiy deleted");
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateBlogCategoryDto createBlogCategoryDto)
+        {
+            var newValue = _mapper.Map<BlogCategory>(createBlogCategoryDto);
+            _blogCategory.TCreate(newValue);
+            return Ok("BlogCategory entitiy created");
+        }
+
+        [HttpPut]
+        public IActionResult Update(UpdateBlogCategoryDto updateBlogCategoryDto)
+        {
+            var values = _mapper.Map<BlogCategory>(updateBlogCategoryDto);
+            _blogCategory.TUpdate(values);
+            return Ok("BlogCategory entitiy updated");
+        }
+    }
+}
