@@ -15,7 +15,7 @@ namespace OnlineEducation.DataAccess.Abstract
         T GetById(int id);
         void Create(T entity);
         void Update(T entity);
-        void Delete(T entity);
+        void Delete(int id);
         int Count();
         int FilteredCount(Expression<Func<T, bool>> predicate);
         List<T> GetFilteredList(Expression<Func<T, bool>> predicate);
