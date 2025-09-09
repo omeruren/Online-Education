@@ -10,8 +10,4 @@
     <ProjectReference Include="..\OnlineEducation.DataAccess\OnlineEducation.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>
