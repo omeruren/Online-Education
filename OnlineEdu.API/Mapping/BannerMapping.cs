@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OnlineEducation.DTO.DTOs.Banner;
+using OnlineEducation.DTO.DTOs.BannerDtos;
 using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Mapping
