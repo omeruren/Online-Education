@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
-using OnlineEducation.DTO.DTOs.Banner;
+using OnlineEducation.DTO.DTOs.BannerDtos;
 using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Controllers

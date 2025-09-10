@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineEducation.DTO.DTOs.Banner
+namespace OnlineEducation.UI.DTOs.BannerDtos
 {
     public class UpdateBannerDto
     {

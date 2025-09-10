@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineEducation.UI.DTOs.Banner
+namespace OnlineEducation.DTO.DTOs.BannerDtos
 {
-    public class UpdateBannerDto
+    public class CreateBannerDto
     {
-        public int BannerId { get; set; }
         public string Title { get; set; }
         public string ImageUrl { get; set; }
     }
