@@ -1,0 +1,18 @@
+﻿using OnlineEducation.UI.DTOs.CourseDtos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OnlineEducation.UI.DTOs.CourseCategoryDtos
+{
+    public class ResultCourseCategoryDto
+    {
+        public int CourseCategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
+        public bool IsShown { get; set; }
+        public List<ResultCourseDto> Courses { get; set; }
+    }
+}
