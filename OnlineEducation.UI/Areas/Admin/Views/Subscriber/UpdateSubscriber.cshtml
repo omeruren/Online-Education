@@ -1,0 +1,20 @@
+﻿@model UpdateSubscriberDto
+@{
+    ViewData["Title"] = "UpdateSubscriber";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+
+	<label>Email</label>
+	<input hidden asp-for="SubscriberId"/>
+	<input type="text" asp-for="Email" class="form-control" />
+	<br />
+	<label>Active State</label>
+	<input type="checkbox" asp-for="IsActive" class="form-check" />
+	<br />
+	<button class="btn btn-outline-primary">Update</button>
+	<a asp-action="Index" asp-area="Admin" asp-controller="Subscriber" class="btn btn-outline-primary">Return</a>
+</form>
+
+
