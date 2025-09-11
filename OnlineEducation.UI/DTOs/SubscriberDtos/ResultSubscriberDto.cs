@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineEducation.UI.DTOs.SubsciberDtos
+namespace OnlineEducation.UI.DTOs.SubscriberDtos
 {
-    public class UpdateSubscriberDto
+    public class ResultSubscriberDto
     {
         public int SubscriberId { get; set; }
         public string Email { get; set; }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineEducation.UI.DTOs.SubsciberDtos
+namespace OnlineEducation.UI.DTOs.SubscriberDtos
 {
-    public class ResultSubscriberDto
+    public class CreateSubscriberDto
     {
-        public int SubscriberId { get; set; }
         public string Email { get; set; }
-        public bool IsActive { get; set; }
+        private bool IsActive { get => false; }
     }
 }
