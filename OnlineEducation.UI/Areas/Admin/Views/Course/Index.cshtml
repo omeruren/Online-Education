@@ -1,0 +1,90 @@
+﻿@model List<ResultCourseDto> 
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@{
+	int count = 0;
+}
+
+<table class="table table-hover">
+	<tr>
+		<th>#</th>
+		<th>Image Url</th>
+		<th>Course Name</th>
+		<th>Price</th>
+		<th>Course Category Name</th>
+		<th>State</th>
+		<th></th>
+		<th>Home Page State</th>
+	</tr>
+	@foreach (var item in Model)
+	{
+		count++;
+		<tr>
+			<th>@count</th>
+			<td>
+				<img src="@item.ImageUrl" style="height:75px; width:75px"  />
+			</td>
+			<td>
+				@item.CourseName
+			</td>
+			<td>
+				@item.Price
+			</td>
+			<td>
+				@item.CourseCategoryId
+			</td>
+			<td>
+				@(item.IsShown ? "Is Showing" : "Is not Showing")
+			</td>
+			<td>
+				<button onclick="deleteCourse(@item.CourseId)" class="btn btn-outline-danger">Remove</button>
+
+
+				<a asp-action="UpdateCourse" asp-controller="Course" asp-area="Admin" asp-route-id="@item.CourseId" class="btn btn-outline-info">
+					Update
+				</a>
+
+			</td>
+			<td>
+				<a asp-action="@(item.IsShown ? "DontShowOnHome" : "ShowOnHome")" asp-asp-controller="Course" asp-asp-area="Admin" asp-route-id="@item.CourseId" class="btn @(item.IsShown ? "btn-outline-secondary" : "btn-outline-success")">
+					@(item.IsShown ? "Do Not Show" : "Show")
+				</a>
+
+			</td>
+		</tr>
+
+	}
+
+
+</table>
+<br />
+
+
+<a asp-action="CreateCourse" asp-controller="Course" asp-area="Admin" class="btn btn-outline-primary float-end"> Create Course </a>
+
+<script>
+
+	function deleteCourse(id){
+
+
+		Swal.fire({
+	  title: "Are you sure?",
+	  text: "You won't be able to revert this!",
+	  icon: "warning",
+	  showCancelButton: true,
+	  confirmButtonColor: "#3085d6",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "Yes, delete it!"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+		window.location.href = "/Admin/Course/DeleteCourse/" + id;
+	  }
+	});
+	}
+</script>
+
