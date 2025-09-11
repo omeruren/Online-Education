@@ -1,0 +1,25 @@
+﻿@model UpdateCourseCategoryDto
+@{
+    ViewData["Title"] = "Update Course Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>UpdateCourseCategory</h1>
+
+
+<form method="post">
+	<input hidden asp-for="CourseCategoryId"/>
+	<label> Course Category Name</label>
+	<input type="text" asp-for="CategoryName" class="form-control" />
+	<br />
+	<label> Descriptione</label>
+	<textarea type="text" rows="5" asp-for="Description" class="form-control"></textarea>
+	<br />
+	<label> Icon</label>
+	<input type="text" asp-for="Icon" class="form-control" />
+	<br />
+	<label>Show / Hide on Home Page</label>
+	<input type="checkbox" asp-for="IsShown" class="form-check" />
+	<br />
+	<button class="btn btn-outline-primary">Update</button>
+</form>
