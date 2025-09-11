@@ -3,11 +3,11 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "OnlineEducation.UI\\OnlineEducation.UI.csproj",
+        "Path": "OnlineEdu.API\\OnlineEducation.API.csproj",
         "Action": "Start"
       },
       {
-        "Path": "OnlineEdu.API\\OnlineEducation.API.csproj",
+        "Path": "OnlineEducation.UI\\OnlineEducation.UI.csproj",
         "Action": "Start"
       }
     ]

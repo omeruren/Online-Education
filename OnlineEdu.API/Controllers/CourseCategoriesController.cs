@@ -9,7 +9,7 @@ namespace OnlineEducation.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseCategoriesController(IGenericService<CourseCategory> _courseCategory, IMapper _mapper) : ControllerBase
+    public class CourseCategoriesController(ICourseCategoryService _courseCategory, IMapper _mapper) : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
@@ -47,5 +47,20 @@ namespace OnlineEducation.API.Controllers
             _courseCategory.TUpdate(values);
             return Ok("CourseCategory entitiy updated");
         }
+
+        [HttpGet("ShowOnHome/{id}")]
+        public IActionResult ShowOnHome(int id)
+        {
+            _courseCategory.TShowOnHome(id);
+            return Ok("Showing on Home Page");
+        }
+
+        [HttpGet("DontShowOnHome/{id}")]
+        public IActionResult DontShowOnHome(int id)
+        {
+            _courseCategory.TDontShowOnHome(id);
+            return Ok("Do not Showing on Home Page");
+        }
+
     }
 }

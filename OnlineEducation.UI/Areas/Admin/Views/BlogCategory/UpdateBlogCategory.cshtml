@@ -1,0 +1,16 @@
+﻿@model UpdateBlogCategoryDto
+
+@{
+    ViewData["Title"] = "Update Blog Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+	<input hidden  asp-for="BlogCategoryId"/>
+	<label>Name</label>
+	<input type="text" asp-for="Name" class="form-control" />
+	<span asp-validation-for="Name" class="text-danger"></span>
+	<br />
+	<button class="btn btn-outline-primary">Update</button>
+</form>
+

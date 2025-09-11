@@ -1,0 +1,76 @@
+﻿@model List<ResultTestimonialDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+	int count = 0;
+}
+
+<table class="table table-hover">
+	<tr>
+		<th>#</th>
+		<th>Image Url</th>
+		<th>Name</th>
+		<th>Comment</th>
+		<th>Star</th>
+		<th></th>
+	</tr>
+	@foreach (var item in Model)
+	{
+		count++;
+		<tr>
+			<th>@count</th>
+			<td>
+				@item.ImageUrl
+			</td>
+			<td>
+				@item.Name
+			</td>
+			<td>
+				@item.Comment
+			</td>
+			<td>
+				@item.Star
+			</td>
+			<td>
+				<button onclick="deleteTestimonial(@item.TestimonialId)" class="btn btn-outline-danger">Remove</button>
+
+				<a asp-action="UpdateTestimonial" asp-controller="Testimonial" asp-area="Admin" asp-route-id="@item.TestimonialId" class="btn btn-outline-info">
+					Update
+				</a>
+
+			</td>
+		</tr>
+
+	}
+
+
+</table>
+<br />
+
+
+<a asp-action="CreateTestimonial" asp-controller="Testimonial" asp-area="Admin" class="btn btn-outline-primary float-end"> Add Testimonial</a>
+
+<script>
+
+	function deleteTestimonial(id){
+
+
+		Swal.fire({
+	  title: "Are you sure?",
+	  text: "You won't be able to revert this!",
+	  icon: "warning",
+	  showCancelButton: true,
+	  confirmButtonColor: "#3085d6",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "Yes, delete it!"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+		window.location.href = "/Admin/Testimonial/DeleteTestimonial/" + id;
+	  }
+	});
+	}
+</script>
+

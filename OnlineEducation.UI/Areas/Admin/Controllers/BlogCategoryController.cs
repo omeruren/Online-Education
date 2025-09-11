@@ -30,6 +30,7 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
             var validator = new BlogCategoryValidator();
             var result = await validator.ValidateAsync(createBlogCategoryDto);
 
+            ModelState.Clear();
             if (!result.IsValid)
             {
                 foreach(var value in result.Errors)
