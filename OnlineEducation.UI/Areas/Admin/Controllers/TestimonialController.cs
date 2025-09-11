@@ -18,7 +18,7 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
             return View(values);
         }
 
-        public async Task<ActionResult> CreateTestimonial()
+        public IActionResult CreateTestimonial()
         {
             return View();
         }
