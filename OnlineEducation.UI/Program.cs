@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineEducation.DataAccess.Context;
 using OnlineEducation.Entity.Entities;
+using OnlineEducation.UI.Services.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<OnlineEducationContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
