@@ -62,5 +62,11 @@ namespace OnlineEducation.API.Controllers
             return Ok("Do not Showing on Home Page");
         }
 
+        [HttpGet("GetActiveCategories")]
+        public IActionResult GetActiveCategories()
+        {
+            var values = _courseCategory.TGetFilteredList(c => c.IsShown == true);
+            return Ok(values);
+        }
     }
 }
