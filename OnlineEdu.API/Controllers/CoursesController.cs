@@ -61,5 +61,13 @@ namespace OnlineEducation.API.Controllers
             _courseService.TDontShowOnHome(id);
             return Ok("Do not Showing On Home Page");
         }
+
+        [HttpGet("GetActiveCourses")]
+
+        public IActionResult GetActiveCourses()
+        {
+            var values = _courseService.TGetFilteredList(c => c.IsShown == true);
+            return Ok(values);
+        }
     }
 }
