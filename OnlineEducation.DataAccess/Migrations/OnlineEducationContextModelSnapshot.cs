@@ -163,7 +163,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("AboutId");
 
-                    b.ToTable("Abouts");
+                    b.ToTable("Abouts", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.AppRole", b =>
@@ -293,7 +293,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("BannerId");
 
-                    b.ToTable("Banners");
+                    b.ToTable("Banners", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Blog", b =>
@@ -326,7 +326,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasIndex("BlogCategoryId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.BlogCategory", b =>
@@ -343,7 +343,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("BlogCategoryId");
 
-                    b.ToTable("BlogCategories");
+                    b.ToTable("BlogCategories", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Contact", b =>
@@ -372,7 +372,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("ContactId");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Course", b =>
@@ -409,7 +409,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasIndex("CourseCategoryId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.CourseCategory", b =>
@@ -437,7 +437,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("CourseCategoryId");
 
-                    b.ToTable("CourseCategories");
+                    b.ToTable("CourseCategories", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.CourseRegister", b =>
@@ -460,7 +460,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("CourseRegisters");
+                    b.ToTable("CourseRegisters", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Message", b =>
@@ -489,7 +489,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("MessageId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.SocialMedia", b =>
@@ -514,7 +514,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("SocialMediaId");
 
-                    b.ToTable("SocialMedias");
+                    b.ToTable("SocialMedias", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Subscriber", b =>
@@ -534,7 +534,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("SubscriberId");
 
-                    b.ToTable("Subscribers");
+                    b.ToTable("Subscribers", (string)null);
                 });
 
             modelBuilder.Entity("OnlineEducation.Entity.Entities.Testimonial", b =>
@@ -562,7 +562,7 @@ namespace OnlineEducation.DataAccess.Migrations
 
                     b.HasKey("TestimonialId");
 
-                    b.ToTable("Testimonials");
+                    b.ToTable("Testimonials", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

@@ -3,6 +3,6 @@
     public class UserLoginDto
     {
         public string Email { get; set; }
-        public int Passsword { get; set; }
+        public string Passsword { get; set; }
     }
 }
