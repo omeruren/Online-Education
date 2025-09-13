@@ -7,7 +7,6 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    [Route("[area]/[controller]/[action]/{id?}")]
     public class SubscriberController : Controller
     {
 
