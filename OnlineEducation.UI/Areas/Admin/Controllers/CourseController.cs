@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineEducation.UI.DTOs.CourseCategoryDtos;
 using OnlineEducation.UI.DTOs.CourseDtos;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class CourseController : Controller

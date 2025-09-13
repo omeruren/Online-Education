@@ -18,6 +18,12 @@ builder.Services.AddDbContext<OnlineEducationContext>(opt =>
 );
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OnlineEducationContext>();
 builder.Services.AddHttpClient();
+builder.Services.ConfigureApplicationCookie(cfg =>
+{
+    cfg.LoginPath = "/Login/SignIn";
+    cfg.LogoutPath = "/Login/SignOut";
+
+});
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -34,7 +40,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

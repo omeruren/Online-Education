@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.UI.DTOs.BannerDtos;
 using OnlineEducation.UI.Helpers;
 using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("[area]/[controller]/[action]/{id?}")]
     public class BannerController : Controller
