@@ -1,6 +1,8 @@
-﻿@{
-	Layout = null;
+﻿
+@{
+    Layout = null;
 }
+
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -14,7 +16,7 @@
 	<meta name="author" content="">
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/png" sizes="16x16" href="~/matrix-admin-master/assets/images/favicon.png">
-	<title> Rens Education - Admin Panel </title>
+	<title> Rens Education - Teacher Panel </title>
 	<!-- Custom CSS -->
 	<link href="~/matrix-admin-master/assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
 	<link href="~/onlineedu-master/assets/css/fontawesome-all.min.css" rel="stylesheet">
@@ -53,7 +55,7 @@
 					<!-- ============================================================== -->
 					<!-- Logo -->
 					<!-- ============================================================== -->
-					<a class="navbar-brand" href="/Admin/About/Index">
+					<a class="navbar-brand" href="/Teacher/Dashboard/Index">
 						<!-- Logo icon -->
 						<b class="logo-icon p-l-10">
 							<!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -234,21 +236,18 @@
 				<!-- Sidebar navigation-->
 				<nav class="sidebar-nav">
 					<ul id="sidebarnav" class="p-t-30">
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="About" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">About</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Banner" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-image"></i><span class="hide-menu">Banner</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="BlogCategory" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-list-numbers"></i><span class="hide-menu">Blog Categories</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Blog" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="hide-menu">Blogs</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Contact" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-phone"></i><span class="hide-menu">Contact</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="CourseCategory" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-playlist-play"></i><span class="hide-menu">Course Categories</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Course" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-keyboard"></i><span class="hide-menu">Courses</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Message" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-comment"></i><span class="hide-menu">Messages</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="SocialMedia" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-linkedin-box"></i><span class="hide-menu">Social Media </span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Subscriber" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Subscribers</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Testimonial" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-quote"></i><span class="hide-menu">Testimonials</span></a></li>
-						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="RoleAssign" asp-area="Admin" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-quote"></i><span class="hide-menu">Assign Role</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Home/Index" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Siteye Git</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Teacher/Dashboard/Index" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyProfile" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Profie</span></a></li>
 
-						
+
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyBlog" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="hide-menu">My Blogs</span></a></li>
+
+
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyCourse" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-keyboard"></i><span class="hide-menu">My Courses</span></a></li>
+
+						<li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MySocialMedia" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-instagram"></i><span class="hide-menu">Social Links</span></a></li>
+
 
 					</ul>
 				</nav>

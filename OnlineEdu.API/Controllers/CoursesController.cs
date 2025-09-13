@@ -36,6 +36,7 @@ namespace OnlineEducation.API.Controllers
         [HttpPost]
         public IActionResult Create(CreateCourseDto createCourseDto)
         {
+
             var newValue = _mapper.Map<Course>(createCourseDto);
             _courseService.TCreate(newValue);
             return Ok("Course entitiy created");
@@ -68,6 +69,15 @@ namespace OnlineEducation.API.Controllers
         {
             var values = _courseService.TGetFilteredList(c => c.IsShown == true);
             return Ok(values);
+        }
+        [HttpGet("GetCoursesByTeacherId/{id}")]
+
+        public IActionResult GetCoursesByTeacherId(int id)
+        {
+            var values = _courseService.TGetFilteredList(x => x.AppUserId == id);
+            var mappedValues = _mapper.Map<List<ResultCourseDto>>(values);
+            return Ok(mappedValues);
+
         }
     }
 }
