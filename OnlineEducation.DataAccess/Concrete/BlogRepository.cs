@@ -13,15 +13,20 @@ namespace OnlineEducation.DataAccess.Concrete
 {
     public class BlogRepository : GenericRepository<Blog>, IBlogRepository
     {
-        private readonly OnlineEducationContext _onlineEducationContext;
+
         public BlogRepository(OnlineEducationContext _context) : base(_context)
         {
-            _onlineEducationContext = _context;
+
         }
 
         public List<Blog> GetBlogsWithCategories()
         {
-            return _onlineEducationContext.Blogs.Include(b => b.BlogCategory).ToList();
+            return _context.Blogs.Include(b => b.BlogCategory).ToList();
+        }
+
+        public List<Blog> GetBlogsWithCategoriesByWriterId(int id)
+        {
+            return _context.Blogs.Include(b => b.BlogCategory).Where(b => b.WriterId == id).ToList();
         }
     }
 }
