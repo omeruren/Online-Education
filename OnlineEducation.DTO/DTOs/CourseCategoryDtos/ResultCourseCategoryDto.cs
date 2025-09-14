@@ -1,4 +1,5 @@
-﻿using OnlineEducation.Entity.Entities;
+﻿using OnlineEducation.DTO.DTOs.CourseDtos;
+using OnlineEducation.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace OnlineEducation.DTO.DTOs.CourseCategoryDtos
         public string Description { get; set; }
         public string Icon { get; set; }
         public bool IsShown { get; set; }
-        public List<Course> Courses { get; set; }
+        public List<ResultCourseDto> Courses { get; set; }
     }
 }
