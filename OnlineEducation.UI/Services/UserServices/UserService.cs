@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
 using OnlineEducation.Entity.Entities;
@@ -6,7 +7,7 @@ using OnlineEducation.UI.DTOs.UserDtos;
 
 namespace OnlineEducation.UI.Services.UserServices
 {
-    public class UserService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<AppRole> _roleManager) : IUserService
+    public class UserService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<AppRole> _roleManager, IMapper _mapper) : IUserService
     {
 
 
@@ -41,6 +42,15 @@ namespace OnlineEducation.UI.Services.UserServices
                 return result;
             }
             return result;
+        }
+
+        public async Task<List<ResultUserDto>> GetFourTeachers()
+        {
+            var teacherList = await _userManager.GetUsersInRoleAsync("Teacher");
+            var values = teacherList.Take(4).ToList();
+            return _mapper.Map<List<ResultUserDto>>(values);
+
+
         }
 
         public async Task<List<AppUser>> GetAllUserAsync()
