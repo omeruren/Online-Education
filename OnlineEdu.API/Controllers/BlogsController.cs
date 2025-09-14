@@ -47,5 +47,12 @@ namespace OnlineEducation.API.Controllers
             _blogService.TUpdate(values);
             return Ok("Blog entitiy updated");
         }
+        [HttpGet("GetBlogByWriterId/{id}")]
+        public IActionResult GetBlogByWriterId(int id)
+        {
+            var values = _blogService.TGetFilteredList(b => b.WriterId == id);
+            var blogs = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(blogs);
+        }
     }
 }

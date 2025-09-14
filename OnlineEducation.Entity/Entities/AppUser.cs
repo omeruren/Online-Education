@@ -14,5 +14,6 @@ namespace OnlineEducation.Entity.Entities
         public string? Avatar { get; set; }
         public List<Course> Courses { get; set; }
         public List<CourseRegister> CourseRegisters { get; set; }
+        public List<Blog> Blogs { get; set; }
     }
 }
