@@ -28,5 +28,10 @@ namespace OnlineEducation.DataAccess.Concrete
         {
             return _context.Blogs.Include(b => b.BlogCategory).Where(b => b.WriterId == id).ToList();
         }
+
+        public List<Blog> GetLastFourBlogsWithCategories()
+        {
+            return _context.Blogs.Include(b => b.BlogCategory).OrderByDescending(b => b.BlogId).Take(4).ToList();
+        }
     }
 }
