@@ -1,6 +1,6 @@
 ﻿@model CreateTestimonialDto
 @{
-    ViewData["Title"] = "CreateTestimonial";
+    ViewData["Title"] = "Create Testimonial";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -12,10 +12,10 @@
 	<label>Image Url</label>
 	<input type="text" asp-for="ImageUrl" class="form-control" />
 	<br />
-	<label>Comment</label>
-	<input type="text" asp-for="Comment" class="form-control" />
+	<label>Comment (max 100 char.)</label>
+	<input type="text" maxlength="100" asp-for="Comment" class="form-control" />
 	<br />
-	<label>Star</label>
+	<label>Star (1-5)</label>
 	<input type="number" asp-for="Star" class="form-control" />
 	<br />
 	<button class="btn btn-outline-primary">Save</button>
