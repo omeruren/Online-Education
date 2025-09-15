@@ -46,9 +46,11 @@ namespace OnlineEducation.UI.Services.UserServices
 
         public async Task<List<ResultUserDto>> GetFourTeachers()
         {
-            var teacherList = await _userManager.GetUsersInRoleAsync("Teacher");
-            var values = teacherList.Take(4).ToList();
-            return _mapper.Map<List<ResultUserDto>>(values);
+            var users = await _userManager.Users.Include(t => t.TeacherSocials).ToListAsync();
+
+            var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).OrderByDescending(t => t.Id).Take(4).ToList();
+
+            return _mapper.Map<List<ResultUserDto>>(teachers);
 
 
         }
