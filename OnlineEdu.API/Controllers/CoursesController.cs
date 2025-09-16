@@ -80,5 +80,11 @@ namespace OnlineEducation.API.Controllers
             return Ok(mappedValues);
 
         }
+        [HttpGet("GetCourseCount")]
+        public IActionResult GetCourseCount()
+        {
+            var courses = _courseService.TCount();
+            return Ok(courses);
+        }
     }
 }

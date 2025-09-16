@@ -86,5 +86,11 @@ namespace OnlineEducation.UI.Services.UserServices
         {
             throw new NotImplementedException();
         }
+
+        public async Task<int> GetTeacherCount()
+        {
+            var teachers = await _userManager.GetUsersInRoleAsync("Teacher");
+            return teachers.Count();
+        }
     }
 }
