@@ -22,7 +22,8 @@ namespace OnlineEducation.API.Controllers
         public IActionResult GetLastFourBlogs()
         {
             var values = _blogService.TGetLastFourBlogsWithCategories();
-            return Ok(values);
+            var blogs = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(blogs);
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
