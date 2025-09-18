@@ -1,0 +1,16 @@
+﻿@model CreateCourseRegisterDto
+@{
+    ViewData["Title"] = "Register Course";
+    Layout = "~/Areas/Student/Views/StudentLayout/Index.cshtml";
+}
+
+<h1>RegisterCourse</h1>
+
+<form method="post">
+    <label>Course</label>
+    <select asp-for="CourseId" asp-items="@ViewBag.courses" class="form-control">
+        <option>Select Category</option>
+    </select>
+    <br />
+    <button class="btn btn-outline-primary">Register to Course</button>
+    </form>

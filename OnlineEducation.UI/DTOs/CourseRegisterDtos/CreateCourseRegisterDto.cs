@@ -1,0 +1,11 @@
+﻿using OnlineEducation.Entity.Entities;
+using OnlineEducation.UI.DTOs.CourseDtos;
+
+namespace OnlineEducation.UI.DTOs.CourseRegisterDtos
+{
+    public class CreateCourseRegisterDto
+    {
+        public int AppUserId { get; set; }
+        public int CourseId { get; set; }
+    }
+}
