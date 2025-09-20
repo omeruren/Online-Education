@@ -15,9 +15,16 @@ namespace OnlineEducation.API.Controllers
         public IActionResult Get()
         {
             var values = _blogService.TGetBlogsWithCategories();
-            return Ok(values);
+            var blogs = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(blogs);
         }
-
+        [HttpGet("GetLastFourBlogs")]
+        public IActionResult GetLastFourBlogs()
+        {
+            var values = _blogService.TGetLastFourBlogsWithCategories();
+            var blogs = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(blogs);
+        }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -46,6 +53,20 @@ namespace OnlineEducation.API.Controllers
             var values = _mapper.Map<Blog>(updateBlogDto);
             _blogService.TUpdate(values);
             return Ok("Blog entitiy updated");
+        }
+        [HttpGet("GetBlogByWriterId/{id}")]
+        public IActionResult GetBlogByWriterId(int id)
+        {
+            var values = _blogService.TGetBlogsWithCategoriesByWriterId(id);
+            var blogs = _mapper.Map<List<ResultBlogDto>>(values);
+            return Ok(blogs);
+        }
+
+        [HttpGet("GetBlogCount")]
+        public IActionResult GetBlogCount()
+        {
+            var blogs = _blogService.TCount();
+            return Ok(blogs);
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.UI.DTOs.CourseCategoryDtos;
 using OnlineEducation.UI.Helpers;
 
 namespace OnlineEducation.UI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    [Route("[area]/[controller]/[action]/{id?}")]
     public class CourseCategoryController : Controller
     {
         private readonly HttpClient _client = HttpClientInstance.CreateClient();

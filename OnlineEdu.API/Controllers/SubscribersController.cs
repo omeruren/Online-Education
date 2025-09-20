@@ -48,5 +48,12 @@ namespace OnlineEducation.API.Controllers
             _subscriberService.TUpdate(values);
             return Ok("Subscriber entitiy updated");
         }
+
+        [HttpGet("GetSubscriberCount")]
+        public IActionResult GetSubscriberCount()
+        {
+            var Subscribers = _subscriberService.TCount();
+            return Ok(Subscribers);
+        }
     }
 }

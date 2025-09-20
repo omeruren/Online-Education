@@ -1,0 +1,40 @@
+﻿@model List<ResultAboutDto>
+
+<div class="about-area section-padding2">
+	<div class="container">
+		@foreach (var about in Model)
+		{
+
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<div class="about-caption mb-50">
+						<!-- Section Tittle -->
+						<div class="section-tittle mb-35">
+							<span>More About Our Company</span>
+							<h2>Want to know more</h2>
+						</div>
+						<p>@about.Description</p>
+						<ul>
+							<li><span class="flaticon-business"></span> @about.Item1</li>
+							<li><span class="flaticon-communications-1"></span> @about.Item2</li>
+							<li><span class="flaticon-graduated"></span> @about.Item3</li>
+							<li><span class="flaticon-tools-and-utensils"></span> @about.Item4</li>
+						</ul>
+						<a href="about.html" class="btn">More About Us</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12">
+					<!-- about-img -->
+					<div class="about-img ">
+						<div class="about-font-img d-none d-lg-block">
+							<img src="@about.ImageUrl1" alt="">
+						</div>
+						<div class="about-back-img ">
+							<img src="@about.ImageUrl2" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

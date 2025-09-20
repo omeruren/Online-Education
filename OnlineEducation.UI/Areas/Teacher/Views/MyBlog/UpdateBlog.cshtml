@@ -1,0 +1,28 @@
+﻿@model UpdateBlogDto
+@{
+	ViewData["Title"] = "Update Blog";
+	Layout = "~/Areas/Teacher/Views/TeacherLayout/Index.cshtml";
+}
+
+
+<form method="post">
+	<input hidden asp-for="BlogId" />
+	<input hidden asp-for="BlogDate" />
+	<input hidden asp-for="WriterId" />
+
+	<label> Title</label>
+	<input type="text" asp-for="Title" class="form-control" />
+	<br />
+	<label>Image URL</label>
+	<input type="text" asp-for="ImageUrl" class="form-control" />
+	<br />
+	<label>Content</label>
+	<textarea rows="5" type="text" asp-for="Content" class="form-control"></textarea>
+	<br />
+	<label>Blog Category</label>
+	<select asp-items="@ViewBag.categories" asp-for="BlogCategoryId" class="form-control">
+		<option>Select Category</option>
+	</select>
+	<br />
+	<button class="btn btn-outline-primary">Update</button>
+</form>
