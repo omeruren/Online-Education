@@ -16,5 +16,6 @@ namespace OnlineEducation.UI.Services.UserServices
         Task<List<ResultUserDto>> GetFourTeachers();
         Task<AppUser> GetUserByIdAsync(int id);
         Task<int> GetTeacherCount();
+        Task<List<ResultUserDto>>GetAllTeachers();
     }
 }

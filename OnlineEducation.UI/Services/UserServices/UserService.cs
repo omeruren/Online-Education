@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
+using OnlineEducation.DataAccess.Context;
 using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.UserDtos;
 
 namespace OnlineEducation.UI.Services.UserServices
 {
-    public class UserService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<AppRole> _roleManager, IMapper _mapper) : IUserService
+    public class UserService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<AppRole> _roleManager, IMapper _mapper, OnlineEducationContext _context) : IUserService
     {
 
 
@@ -91,6 +92,16 @@ namespace OnlineEducation.UI.Services.UserServices
         {
             var teachers = await _userManager.GetUsersInRoleAsync("Teacher");
             return teachers.Count();
+        }
+
+        public async Task<List<ResultUserDto>> GetAllTeachers()
+        {
+            var users = await _userManager.Users.Include(t => t.TeacherSocials).ToListAsync();
+
+            var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).ToList();
+
+            return _mapper.Map<List<ResultUserDto>>(teachers);
+
         }
     }
 }
