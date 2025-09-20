@@ -1,7 +1,7 @@
 ﻿@model List<ResultCourseDto>
 @{
-	ViewData["Title"] = "GetCoursesByCategoryId";
-	Layout = "~/Views/UILayout/Layout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Layout.cshtml";
 }
 
 
@@ -14,10 +14,8 @@
 					<div class="col-xl-12">
 						<div class="hero-cap hero-cap2 text-center">
 							<h2>
-								@(ViewBag.category == null 
-								? "Course not Found" 
-								: ViewBag.category + " Courses")
-								</h2>
+								All Courses
+							</h2>
 
 
 						</div>
