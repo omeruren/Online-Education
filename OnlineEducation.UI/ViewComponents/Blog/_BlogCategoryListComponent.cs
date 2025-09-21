@@ -8,7 +8,7 @@ namespace OnlineEducation.UI.ViewComponents.Blog
 {
     public class _BlogCategoryListComponent : ViewComponent
     {
-        HttpClient _client = HttpClientInstance.CreateClient();
+       private readonly HttpClient _client = HttpClientInstance.CreateClient();
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var categoryList = await _client.GetFromJsonAsync<List<ResultBlogCategoryDto>>("blogCategories");

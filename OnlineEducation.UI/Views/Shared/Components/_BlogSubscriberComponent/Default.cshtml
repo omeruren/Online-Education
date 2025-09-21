@@ -1,0 +1,37 @@
+﻿
+@model CreateSubscriberDto
+
+<aside class="single_sidebar_widget newsletter_widget">
+    <h4 class="widget_title" style="color: #2d2d2d;">Subscribe</h4>
+    <form asp-action="Subscribe" asp-controller="Blog">
+        <div class="form-group">
+            <input type="email" asp-for="Email" class="form-control" onfocus="this.placeholder = ''"
+                   onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+        </div>
+        <button onclick="subscribe()" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                type="submit">
+            Subscribe
+        </button>
+    </form> 
+</aside>
+
+<script>
+
+	function subscribe(){
+
+
+		Swal.fire({
+	  title: "Succsessfully subscribed ",
+	  text: "Thank You for subscribing us ",
+	  icon: "success",
+	  showCancelButton: false,
+	  confirmButtonColor: "#3085d6",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "Ok"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+		window.location.href = "/Blog/Index";
+	  }
+	});
+	}
+</script>
