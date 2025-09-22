@@ -25,7 +25,7 @@
 			<div class="col-12">
 
 
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101886.2700432001!2d37.38013695!3d37.05877145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1531e6b4f7f18c2f%3A0xc02e8b35116baad0!2sGaziantep!5e0!3m2!1str!2str!4v1758530518368!5m2!1str!2str" width="1200" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				<iframe src="@ViewBag.MapUrls" width="1200" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
 		</div>
 			<hr style="height:2px;width:1200px; border-width:0;color:gray;background-color:gray">
@@ -34,29 +34,8 @@
 				<h2 class="contact-title">Get in Touch</h2>
 			</div>
 			@await Component.InvokeAsync("_ContactSendMessage")
-			<div class="col-lg-3 offset-lg-1">
-				<div class="media contact-info">
-					<span class="contact-info__icon"><i class="ti-home"></i></span>
-					<div class="media-body">
-						<h3>Gaziantep, Nizip.</h3>
-						<p>Rosemead, CA 91770</p>
-					</div>
-				</div>
-				<div class="media contact-info">
-					<span class="contact-info__icon"><i class="ti-tablet"></i></span>
-					<div class="media-body">
-						<h3>+1 253 565 2365</h3>
-						<p>Mon to Fri 9am to 6pm</p>
-					</div>
-				</div>
-				<div class="media contact-info">
-					<span class="contact-info__icon"><i class="ti-email"></i></span>
-					<div class="media-body">
-						<h3>omer.uren011@gmail.com</h3>
-						<p>Send us your query anytime!</p>
-					</div>
-				</div>
-			</div>
+			@await Component.InvokeAsync("_ContactInfo")
+			
 		</div>
 	</div>
 </section>
