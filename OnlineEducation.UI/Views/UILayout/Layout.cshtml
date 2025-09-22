@@ -129,32 +129,18 @@
                                     <h4>Stay Updated</h4>
                                 </div>
                                 <!-- Form -->
-                                <div class="footer-form mb-50">
-                                    <div id="mc_embed_signup">
-                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                            <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'">
-                                            <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
-                                                    Subscribe Now
-                                                </button>
-                                            </div>
-                                            <div class="mt-10 info"></div>
-                                        </form>
-                                    </div>
-                                </div>
+                                @await Component.InvokeAsync("_UILayoutSubscribeComponent")
+                               
                             </div>
                             <div class="col-xl-5 col-lg-5">
                                 <div class="footer-tittle2">
                                     <h4>Let’s Get Social</h4>
                                 </div>
                                 <!-- Footer Social -->
-                                <div class="footer-social">
-                                    <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-google"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
-                                </div>
+                                @await Component.InvokeAsync("_UILayoutSocialMediaLinks")
+                              
+                                
+                            
                             </div>
                         </div>
                     </div>
@@ -164,13 +150,15 @@
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
                                     <h4>About Us</h4>
+                                  
                                     <ul>
-                                        <li><a href="#">Online Learning</a></li>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Careers</a></li>
-                                        <li><a href="#">Press Center</a></li>
-                                        <li><a href="#">Become an Instructor</a></li>
+                                        <li><a href="/Course/Index">Online Learning</a></li>
+                                        <li><a href="/About/Index">About Us</a></li>
+                                        <li><a href="/Blog/Index">Blogs</a></li>
+                                        <li><a href="/Contact/Index">Contact Us</a></li>
+                                        <li><a href="/Teacher/Index">Become an Instructor</a></li>
                                     </ul>
+                                
                                 </div>
                             </div>
                         </div>
@@ -208,9 +196,9 @@
                                     <h4>Spport</h4>
                                     <ul>
                                         <li><a href="#">Support</a></li>
-                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="/Contact/Index">Contact Us</a></li>
                                         <li><a href="#">System Requirements</a></li>
-                                        <li><a href="#">Register Activation Key</a></li>
+                                        <li><a href="/Register/Index">Register Activation Key</a></li>
                                         <li><a href="#">Site feedback</a></li>
                                     </ul>
                                 </div>
@@ -236,6 +224,7 @@
         </div>
         <!-- Footer End-->
     </footer>
+
     <!-- Scroll Up -->
     <div id="back-top">
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -280,6 +269,26 @@
     <script src="~/onlineedu-master/assets/js/plugins.js"></script>
     <script src="~/onlineedu-master/assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+        function subscribe(){
+
+
+            Swal.fire({
+          title: "Succsessfully subscribed ",
+          text: "Thank You for subscribing us ",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ok"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/Blog/Index";
+          }
+        });
+        }
+    </script>
 
 </body>
 </html>
