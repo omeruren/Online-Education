@@ -5,14 +5,18 @@
 	<ul class="list cat-list">
 		@foreach (var blogCat in Model)
 		{
-			<li>
+			@if (blogCat.BlogCount != 0)
+			{
+				<li>
 
-				<a href="#" class="d-flex">
-					<p>@blogCat.CategoryName</p>
-					<p>(@blogCat.BlogCount)</p>
-				</a>
-			</li>
+					<a href="/Blog/BlogsByCategory/@blogCat.BlogCategoryId" class="d-flex">
+						<p>@blogCat.CategoryName</p>
+						<p>(@blogCat.BlogCount)</p>
+					</a>
+				</li>
+			}
 		}
+
 
 	</ul>
 </aside>

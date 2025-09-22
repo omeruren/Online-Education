@@ -17,7 +17,8 @@ namespace OnlineEducation.UI.ViewComponents.Blog
                                   select new BlogCatWithCountViewModel
                                   {
                                       CategoryName = blogCategory.Name,
-                                      BlogCount = blogCategory.Blogs.Count
+                                      BlogCount = blogCategory.Blogs.Count,
+                                      BlogCategoryId = blogCategory.BlogCategoryId
                                   }
                                   ).ToList();
 
