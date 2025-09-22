@@ -9,26 +9,26 @@ namespace OnlineEducation.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogCategoriesController(IGenericService<BlogCategory> _blogCategory, IMapper _mapper) : ControllerBase
+    public class BlogCategoriesController(IBlogCategoryService _blogCategoryService, IMapper _mapper) : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            var values = _blogCategory.TGetList();
+            var values = _blogCategoryService.TGetCategoriesWithBlogs();
             return Ok(values);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var value = _blogCategory.TGetById(id);
+            var value = _blogCategoryService.TGetById(id);
             return Ok(value);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _blogCategory.TDelete(id);
+            _blogCategoryService.TDelete(id);
             return Ok("BlogCategory entitiy deleted");
         }
 
@@ -36,7 +36,7 @@ namespace OnlineEducation.API.Controllers
         public IActionResult Create(CreateBlogCategoryDto createBlogCategoryDto)
         {
             var newValue = _mapper.Map<BlogCategory>(createBlogCategoryDto);
-            _blogCategory.TCreate(newValue);
+            _blogCategoryService.TCreate(newValue);
             return Ok("BlogCategory entitiy created");
         }
 
@@ -44,7 +44,7 @@ namespace OnlineEducation.API.Controllers
         public IActionResult Update(UpdateBlogCategoryDto updateBlogCategoryDto)
         {
             var values = _mapper.Map<BlogCategory>(updateBlogCategoryDto);
-            _blogCategory.TUpdate(values);
+            _blogCategoryService.TUpdate(values);
             return Ok("BlogCategory entitiy updated");
         }
     }

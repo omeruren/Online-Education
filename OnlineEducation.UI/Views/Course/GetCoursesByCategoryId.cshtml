@@ -14,10 +14,10 @@
 					<div class="col-xl-12">
 						<div class="hero-cap hero-cap2 text-center">
 							<h2>
-								@(ViewBag.category == "Courses not found"
-																? ViewBag.category
-																: ViewBag.category + " Courses")
-							</h2>
+								@(ViewBag.category == null 
+								? "Course not Found" 
+								: ViewBag.category + " Courses")
+								</h2>
 
 
 						</div>

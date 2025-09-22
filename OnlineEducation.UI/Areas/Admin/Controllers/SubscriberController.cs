@@ -32,34 +32,28 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> UpdateSubscriber(int id)
+        public async Task<IActionResult> ChangeStatusSubscriber(int id)
         {
-            var values = await _client.GetFromJsonAsync<UpdateSubscriberDto>($"Subscribers/{id}");
-            return View(values);
-        }
+            var value = await _client.GetFromJsonAsync<UpdateSubscriberDto>($"Subscribers/{id}");
+            if (value.IsActive)
+            {
+                value.IsActive = false;
+            }
+            else
+            {
+                value.IsActive = true;
+            }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdateSubscriber(UpdateSubscriberDto updateSubscriberDto)
-        {
-            var values = await _client.PutAsJsonAsync("Subscribers", updateSubscriberDto);
+            await _client.PutAsJsonAsync("Subscribers", value);
+
             return RedirectToAction(nameof(Index));
         }
-
         public async Task<IActionResult> DeleteSubscriber(int id)
         {
             await _client.DeleteAsync($"Subscribers/{id}");
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> ShowOnHome(int id)
-        {
-            await _client.GetAsync("Subscribers/ShowOnHome/" + id);
-            return RedirectToAction(nameof(Index));
-        }
-        public async Task<IActionResult> DontShowOnHome(int id)
-        {
-            await _client.GetAsync("Subscribers/DontShowOnHome/" + id);
-            return RedirectToAction(nameof(Index));
-        }
+      
     }
 }

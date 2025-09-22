@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.UI.DTOs.UserDtos;
 using OnlineEducation.UI.Services.UserServices;
@@ -37,7 +38,7 @@ public class LoginController(IUserService _userService) : Controller
     [HttpGet]
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync(); // Cookie temizlenir
+        await HttpContext.SignOutAsync("Identity.Application"); // clear cookie
         return RedirectToAction("SignIn", "Login");
     }
 }

@@ -40,7 +40,7 @@
 			<td>@item.Item3</td>
 			<td>@item.Item4</td>
 			<td>
-				<a asp-action="DeleteAbout" asp-controller="About" asp-area="Admin" asp-route-id="@item.AboutId" class="btn btn-outline-danger">
+				<a asp-action="DeleteAbout" onclick="deleteAbout(@item.AboutId)" asp-controller="About" asp-area="Admin" asp-route-id="@item.AboutId" class="btn btn-outline-danger">
 					Remove</a>
 				<a asp-action="UpdateAbout" asp-controller="About" asp-area="Admin" asp-route-id = "@item.AboutId" class="btn btn-outline-info">
 					Update</a>
@@ -55,3 +55,24 @@
 <br />
 
 <a asp-action="CreateAbout" asp-controller="About" asp-area="Admin" class="btn btn-outline-primary float-end"> Create About</a>
+
+<script>
+
+	function deleteAbout(id){
+
+
+		Swal.fire({
+	  title: "Are you sure?",
+	  text: "You won't be able to revert this!",
+	  icon: "warning",
+	  showCancelButton: true,
+	  confirmButtonColor: "#3085d6",
+	  cancelButtonColor: "#d33",
+	  confirmButtonText: "Yes, delete it!"
+	}).then((result) => {
+	  if (result.isConfirmed) {
+		window.location.href = "/Admin/About/DeleteAbout/" + id;
+	  }
+	});
+	}
+</script>

@@ -24,14 +24,14 @@
 			<td>
 				@item.Email
 			</td>
-			<td>
-				@item.IsActive
+			<td class="@(item.IsActive ? " text-success" : "text-secondary")">
+				@(item.IsActive ? "Active" : "Awaiting approval")
 			</td>
 			<td>
 				<button onclick="deleteSubscriber(@item.SubscriberId)" class="btn btn-outline-danger">Remove</button>
 
-				<a asp-action="UpdateSubscriber" asp-controller="Subscriber" asp-area="Admin" asp-route-id="@item.SubscriberId" class="btn btn-outline-info">
-					Update
+				<a asp-action="ChangeStatusSubscriber" asp-controller="Subscriber" asp-area="Admin" asp-route-id="@item.SubscriberId" class="@(item.IsActive ? "btn btn-outline-secondary" : "btn btn-outline-success")">
+					@(item.IsActive ? "Deactiavte" : "Approve")
 				</a>
 
 			</td>

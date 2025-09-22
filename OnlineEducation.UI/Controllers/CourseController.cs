@@ -8,23 +8,22 @@ namespace OnlineEducation.UI.Controllers
     public class CourseController : Controller
     {
         private readonly HttpClient _client = HttpClientInstance.CreateClient();
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var courses = await _client.GetFromJsonAsync<List<ResultCourseDto>>("courses");
+
+            return View(courses);
         }
 
         public async Task<IActionResult> GetCoursesByCategoryId(int id)
         {
             var courses = await _client.GetFromJsonAsync<List<ResultCourseDto>>($"courses/GetCoursesByCategoryId/{id}");
-            if (courses != null && courses.Any())
-            {
-                var courseWithCategory = courses.FirstOrDefault(x => x.CourseCategory != null);
-                ViewBag.category = courseWithCategory?.CourseCategory?.CategoryName ?? "Kategori bulunamadı";
-            }
-            else
-            {
-                ViewBag.category = "Courses not found";
-            }
+
+
+            var category = (from x in courses select x.CourseCategory.CategoryName).FirstOrDefault();
+            ViewBag.category = category;
+        
+       
             return View(courses);
 
         }

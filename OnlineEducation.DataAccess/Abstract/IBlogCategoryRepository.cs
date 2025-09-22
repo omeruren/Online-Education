@@ -1,0 +1,14 @@
+﻿using OnlineEducation.Entity.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OnlineEducation.DataAccess.Abstract
+{
+    public interface IBlogCategoryRepository : IRepository<BlogCategory>
+    {
+        List<BlogCategory> GetCategoriesWithBlogs();
+    }
+}

@@ -1,5 +1,5 @@
-﻿@using OnlineEducation.Entity.Entities
-@model List<AppUser>
+﻿
+@model List<UserViewModel>
 @{
     ViewData["Title"] = "User List";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -17,6 +17,7 @@
 		<th>#</th>
 		<th>Full Name</th>
 		<th>User Name</th>
+		<th>Role</th>
 		<th></th>
 	</tr>
 	@foreach (var item in Model)
@@ -25,12 +26,14 @@
 		<tr>
 			<th>@count</th>
 			<td>
-				@item.FirstName @item.LastName
+				@item.FullName
 			</td>
 			<td>
 				@item.UserName
 			</td>
-
+			<td>
+				@string.Join(", ", item.Roles) 
+			</td>
 			<td>
 
 

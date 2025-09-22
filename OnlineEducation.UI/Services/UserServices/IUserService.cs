@@ -8,7 +8,7 @@ namespace OnlineEducation.UI.Services.UserServices
     {
         Task<IdentityResult> CreateUserAsync(UserRegisterDto userRegisterDto);
         Task<string> LoginAsync(UserLoginDto userLoginDto);
-        Task<bool> LogoutAsync();
+        Task LogoutAsync();
         Task<bool> CreateRoleAsync(UserRoleDto userRoleDto);
   
         Task<bool> AssignRoleAsync(List<AssignRoleDto> assignRoleDto);
@@ -16,5 +16,6 @@ namespace OnlineEducation.UI.Services.UserServices
         Task<List<ResultUserDto>> GetFourTeachers();
         Task<AppUser> GetUserByIdAsync(int id);
         Task<int> GetTeacherCount();
+        Task<List<ResultUserDto>>GetAllTeachers();
     }
 }
