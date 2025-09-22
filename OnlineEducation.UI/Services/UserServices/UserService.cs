@@ -83,11 +83,6 @@ namespace OnlineEducation.UI.Services.UserServices
             return null;
         }
 
-        public Task<bool> LogoutAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<int> GetTeacherCount()
         {
             var teachers = await _userManager.GetUsersInRoleAsync("Teacher");
@@ -103,5 +98,11 @@ namespace OnlineEducation.UI.Services.UserServices
             return _mapper.Map<List<ResultUserDto>>(teachers);
 
         }
+        public async Task LogoutAsync()
+        {
+           await _signInManager.SignOutAsync();
+
+        }
+
     }
 }
