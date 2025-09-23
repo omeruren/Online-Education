@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineEducation.DataAccess.Context;
 
@@ -11,9 +12,11 @@ using OnlineEducation.DataAccess.Context;
 namespace OnlineEducation.DataAccess.Migrations
 {
     [DbContext(typeof(OnlineEducationContext))]
-    partial class OnlineEducationContextModelSnapshot : ModelSnapshot
+    [Migration("20250923110021_mig_course_video_entity")]
+    partial class mig_course_video_entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

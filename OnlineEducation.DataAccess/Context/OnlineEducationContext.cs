@@ -15,7 +15,7 @@ namespace OnlineEducation.DataAccess.Context
         {
 
         }
-        public DbSet<About> Abouts { get; set; }
+        public DbSet<About> Abouts { get; set; } // Entity Name : Singular, Table Name : Plural
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogCategory> BlogCategories { get; set; }
@@ -28,6 +28,7 @@ namespace OnlineEducation.DataAccess.Context
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<CourseRegister> CourseRegisters { get; set; }
         public DbSet<TeacherSocial> TeacherSocials { get; set; }
+        public DbSet<CourseVideo> CourseVideos { get; set; } 
 
 
     }
