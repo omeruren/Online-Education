@@ -26,7 +26,7 @@ namespace OnlineEducation.DataAccess.Concrete
                 .Include(x => x.BlogCategory)
                 .Include(x => x.Writer)
                 .Where(x => x.BlogCategoryId == id)
-                .ToList();
+                .ToList(); // Eager Loading
         }
 
         public List<Blog> GetBlogsWithCategories()
@@ -35,7 +35,7 @@ namespace OnlineEducation.DataAccess.Concrete
                 .Blogs
                 .Include(b => b.BlogCategory)
                 .Include(x => x.Writer)
-                .ToList();
+                .ToList(); 
         }
 
         public List<Blog> GetBlogsWithCategoriesByWriterId(int id)
