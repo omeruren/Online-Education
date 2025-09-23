@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
 using OnlineEducation.DTO.DTOs.UserDtos;
 using OnlineEducation.Entity.Entities;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersControllercs(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, IJwtService _jwtService) : ControllerBase
+    public class UsersController(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, IJwtService _jwtService) : ControllerBase
     {
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
@@ -25,10 +24,9 @@ namespace OnlineEducation.API.Controllers
             if (!result.Succeeded)
                 return BadRequest("Wrong credantials");
 
-            var token = _jwtService.CreateTokenAsync(user);
+            var token = await _jwtService.CreateTokenAsync(user);
 
             return Ok(token);
         }
-
     }
 }
