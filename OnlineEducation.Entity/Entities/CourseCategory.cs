@@ -13,7 +13,7 @@ namespace OnlineEducation.Entity.Entities
         public string Description { get; set; }
         public string Icon { get; set; }
         public bool IsShown { get; set; }
-        public List<Course> Courses { get; set; }
+        public virtual List<Course> Courses { get; set; }
 
     }
 }

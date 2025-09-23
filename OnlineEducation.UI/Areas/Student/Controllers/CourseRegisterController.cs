@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.CourseDtos;
 using OnlineEducation.UI.DTOs.CourseRegisterDtos;
+using OnlineEducation.UI.DTOs.CourseVideoDtos;
 using OnlineEducation.UI.Helpers;
 using System.Threading.Tasks;
 
@@ -57,11 +58,12 @@ namespace OnlineEducation.UI.Areas.Student.Controllers
             return View(createCourseRegisterDto);
         }
 
-      
-        public async Task<IActionResult> DeleteCourseRegister(int id)
+        public async Task<IActionResult> CourseVideos(int id)
         {
-            await _client.DeleteAsync($"courseRegisters/{id}");
-            return RedirectToAction(nameof(Index));
+            var values = await _client.GetFromJsonAsync<List<ResultCourseVideoDto>>($"courseVideos/GetCourseVideosByCourseId/{id}");
+            ViewBag.CourseName = values.Select(x => x.Course.CourseName).FirstOrDefault();
+            return View(values);
+
         }
 
     }

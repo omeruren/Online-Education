@@ -15,11 +15,12 @@
 		<th>#</th>
 		<th>Image Url</th>
 		<th>Course Name</th>
-		<th>Price</th>
 		<th>Course Category Name</th>
+		<th>Instructor Name</th>
+		<th>Price</th>
 		<th>State</th>
-		<th></th>
 		<th>Home Page State</th>
+		<th></th>
 	</tr>
 	@foreach (var item in Model)
 	{
@@ -33,13 +34,22 @@
 				@item.CourseName
 			</td>
 			<td>
-				@item.Price
+				@item.CourseCategory.CategoryName
 			</td>
 			<td>
-				@item.CourseCategoryId
+				@item.AppUser.FirstName @item.AppUser.LastName
+			</td>
+			<td>
+				@item.Price.ToString("C2")
 			</td>
 			<td>
 				@(item.IsShown ? "Is Showing" : "Is not Showing")
+			</td>
+			<td>
+				<a asp-action="@(item.IsShown ? "DontShowOnHome" : "ShowOnHome")" asp-asp-controller="Course" asp-asp-area="Admin" asp-route-id="@item.CourseId" class="btn @(item.IsShown ? "btn-outline-secondary" : "btn-outline-success")">
+					@(item.IsShown ? "Do Not Show" : "Show")
+				</a>
+
 			</td>
 			<td>
 				<button onclick="deleteCourse(@item.CourseId)" class="btn btn-outline-danger">Remove</button>
@@ -47,12 +57,6 @@
 
 				<a asp-action="UpdateCourse" asp-controller="Course" asp-area="Admin" asp-route-id="@item.CourseId" class="btn btn-outline-info">
 					Update
-				</a>
-
-			</td>
-			<td>
-				<a asp-action="@(item.IsShown ? "DontShowOnHome" : "ShowOnHome")" asp-asp-controller="Course" asp-asp-area="Admin" asp-route-id="@item.CourseId" class="btn @(item.IsShown ? "btn-outline-secondary" : "btn-outline-success")">
-					@(item.IsShown ? "Do Not Show" : "Show")
 				</a>
 
 			</td>
