@@ -1,0 +1,33 @@
+﻿@model List<ResultCourseVideoDto>
+@{
+	ViewData["Title"] = "Course Videos";
+	Layout = "~/Areas/Student/Views/StudentLayout/Index.cshtml";
+}
+
+<h2> @ViewBag.CourseName</h2>
+<table class="table table-hover">
+	<tr>
+		<th>#</th>
+		<th>Video</th>
+	</tr>
+	@foreach (var video in Model)
+	{
+
+		<tr>
+			<th>@video.VideoNumber</th>
+			<td>
+
+				<iframe width="560" height="315" 
+					src="@video.VideoUrl" 
+					title="YouTube video player" frameborder="0" 
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+					referrerpolicy="strict-origin-when-cross-origin" 
+					allowfullscreen></iframe>
+			</td>
+		</tr>
+	}
+
+</table>
+<br />
+<a href="/Student/CourseRegister/Index" class="btn btn-outline-primary">Return</a>
+
