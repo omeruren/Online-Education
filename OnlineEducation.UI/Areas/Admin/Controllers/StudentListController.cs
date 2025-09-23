@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace OnlineEducation.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="Admin")]
-    public class TeacherListController(UserManager<AppUser> _userManager) : Controller
+    [Authorize(Roles = "Admin")]
+    public class StudentListController(UserManager<AppUser> _userManager) : Controller
     {
         public async Task<IActionResult> Index()
         {
-            var teachers = await _userManager.GetUsersInRoleAsync("Teacher");
-            return View(teachers);
+            var students = await _userManager.GetUsersInRoleAsync("Student");
+            return View(students);
         }
     }
 }
