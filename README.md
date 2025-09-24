@@ -19,10 +19,15 @@ Proje; Clean Architecture prensipleri ve best practices gözetilerek, UI, API, B
 OnlineEducation.sln
 │
 ├── OnlineEducation.API        → REST API (authentication, course, blog vb.)
+
 ├── OnlineEducation.UI         → Kullanıcı arayüzü
+
 ├── OnlineEducation.Business   → İş mantığı (service layer, validation, rules)
+
 ├── OnlineEducation.DataAccess → Repository + EF Core ile veri erişimi
+
 ├── OnlineEducation.Entity     → Domain varlıkları (User, Course, Blog, Enrollment, ...)
+
 ├── OnlineEducation.DTO        → Veri transfer objeleri
 
 **Features**
