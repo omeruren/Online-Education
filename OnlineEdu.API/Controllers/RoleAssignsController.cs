@@ -12,7 +12,7 @@ namespace OnlineEducation.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleAssignsController(IUserService _userService, UserManager<AppUser> _userManager, RoleManager<AppRole> _roleManager, IHttpContextAccessor  _httpContextAccessor) : ControllerBase
+    public class RoleAssignsController(IUserService _userService, UserManager<AppUser> _userManager, RoleManager<AppRole> _roleManager): ControllerBase
     {
         [HttpGet]
 
@@ -32,7 +32,8 @@ namespace OnlineEducation.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserForRoleAssign(int id) {
+        public async Task<IActionResult> GetUserForRoleAssign(int id)
+        {
             var user = await _userService.GetUserByIdAsync(id);
 
             var roles = await _roleManager.Roles.ToListAsync();
@@ -44,6 +45,7 @@ namespace OnlineEducation.API.Controllers
             foreach (var role in roles)
             {
                 var assignRole = new AssignRoleDto();
+                assignRole.UserId = user.Id;
                 assignRole.RoleId = role.Id;
                 assignRole.RoleName = role.Name;
                 assignRole.RoleExist = userRoles.Contains(role.Name);
@@ -54,8 +56,10 @@ namespace OnlineEducation.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AssignRole(List<AssignRoleDto> assignRoleDtoList) {
-            int userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        public async Task<IActionResult> AssignRole(List<AssignRoleDto> assignRoleDtoList)
+        {
+
+            var userId = assignRoleDtoList.Select(x => x.UserId).FirstOrDefault();
             var user = await _userService.GetUserByIdAsync(userId);
 
             foreach (var item in assignRoleDtoList)

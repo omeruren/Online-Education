@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineEducation.Business.Abstract;
 using OnlineEducation.DTO.DTOs.UserDtos;
 using OnlineEducation.Entity.Entities;
@@ -21,7 +22,7 @@ namespace OnlineEducation.API.Controllers
             if (user == null)
                 return NotFound("User with this email not found");
 
-            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Passsword, false, false);
 
             if (!result.Succeeded)
                 return BadRequest("Wrong credantials");
@@ -61,6 +62,16 @@ namespace OnlineEducation.API.Controllers
         {
             var students = await _userManager.GetUsersInRoleAsync("Student");
             return Ok(students);
+        }
+
+        [HttpGet("GetFourTeachers")]
+        public async Task<IActionResult> GetFourTeachers()
+        {
+            var users = await _userManager.Users.Include(t => t.TeacherSocials).ToListAsync();
+
+            var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).OrderByDescending(t => t.Id).Take(4).ToList();
+
+            return Ok(teachers);
         }
 
     }

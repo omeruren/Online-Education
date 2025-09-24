@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.UserDtos;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Admin.Controllers
 {

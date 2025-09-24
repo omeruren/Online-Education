@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.TeacherSocialDtos;
-using OnlineEducation.UI.Helpers;
 using OnlineEducation.UI.Services.TokenServices;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Teacher.Controllers
 {

@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.BlogCategoryDtos;
 using OnlineEducation.UI.DTOs.BlogDtos;
-using OnlineEducation.UI.Helpers;
 using OnlineEducation.UI.Services.TokenServices;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Teacher.Controllers
 {
