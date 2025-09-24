@@ -1,21 +1,27 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using OnlineEducation.DataAccess.Context;
-using OnlineEducation.Entity.Entities;
-using OnlineEducation.UI.Services.RoleServices;
 using OnlineEducation.UI.Services.TokenServices;
 using OnlineEducation.UI.Services.UserServices;
+using System.Net.Http.Headers;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("RensEduClient", cfg => // Named Client
+{
+    var tokenService = builder.Services.BuildServiceProvider().GetRequiredService<ITokenService>();
+    var token = tokenService.GetUserToken;
+
+    cfg.BaseAddress = new Uri("https://localhost:7029/api/");
+
+    if (token != null)
+        cfg.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenService.GetUserToken);
+
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>

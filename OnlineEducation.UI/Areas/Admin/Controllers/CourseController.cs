@@ -12,20 +12,25 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
     [Area("Admin")]
     public class CourseController : Controller
     {
+        private readonly HttpClient _client;
+
+        public CourseController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task CourseCategoryDropDown()
         {
             var courseCategoryList = await _client.GetFromJsonAsync<List<ResultCourseCategoryDto>>("courseCategories");
 
             List<SelectListItem> courseCategories = (from c in courseCategoryList
-                                               select new SelectListItem
-                                               {
-                                                   Text = c.CategoryName,
-                                                   Value = c.CourseCategoryId.ToString()
-                                               }).ToList();
+                                                     select new SelectListItem
+                                                     {
+                                                         Text = c.CategoryName,
+                                                         Value = c.CourseCategoryId.ToString()
+                                                     }).ToList();
             ViewBag.courseCategories = courseCategories;
         }
 
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
         public async Task<IActionResult> Index()
         {
 
@@ -77,6 +82,6 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
             await _client.GetAsync("courses/DontShowOnHome/" + id);
             return RedirectToAction(nameof(Index));
         }
-    
+
     }
 }

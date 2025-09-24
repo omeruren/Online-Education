@@ -10,7 +10,12 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
     [Area("Admin")]
     public class BannerController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public BannerController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IActionResult> Index()
         {
             var values = await _client.GetFromJsonAsync <List<ResultBannerDto>>("banners");

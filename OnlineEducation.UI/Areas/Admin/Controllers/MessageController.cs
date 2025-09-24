@@ -9,7 +9,12 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
     [Area("Admin")]
     public class MessageController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public MessageController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IActionResult> Index()
         {
 

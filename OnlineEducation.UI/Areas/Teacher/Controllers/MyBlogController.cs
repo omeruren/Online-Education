@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.BlogCategoryDtos;
 using OnlineEducation.UI.DTOs.BlogDtos;
-using OnlineEducation.UI.Helpers;
 using OnlineEducation.UI.Services.TokenServices;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
-    public class MyBlogController(ITokenService _tokenService) : Controller
+    public class MyBlogController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
+
+        public MyBlogController(IHttpClientFactory clientFactory, ITokenService tokenService)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+            _tokenService = tokenService;
+        }
         public async Task<IActionResult> Index()
         {
             var userId = _tokenService.GetUserId;
@@ -48,7 +51,7 @@ namespace OnlineEducation.UI.Areas.Teacher.Controllers
         public async Task<IActionResult> UpdateBlog(UpdateBlogDto updateBlogDto)
         {
             var values = await _client.PutAsJsonAsync("blogs", updateBlogDto);
-           
+
             return RedirectToAction(nameof(Index));
         }
 

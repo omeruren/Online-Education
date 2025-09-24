@@ -1,22 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.CourseDtos;
 using OnlineEducation.UI.DTOs.CourseRegisterDtos;
 using OnlineEducation.UI.DTOs.CourseVideoDtos;
-using OnlineEducation.UI.Helpers;
 using OnlineEducation.UI.Services.TokenServices;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Student.Controllers
 {
     [Area("Student")]
     [Authorize(Roles = "Student")]
-    public class CourseRegisterController(ITokenService _tokenService) : Controller
+    public class CourseRegisterController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
+        public CourseRegisterController(IHttpClientFactory clientFactory, ITokenService tokenService)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+            _tokenService = tokenService;
+        }
         public async Task<IActionResult> Index()
         {
             var userId =_tokenService.GetUserId;

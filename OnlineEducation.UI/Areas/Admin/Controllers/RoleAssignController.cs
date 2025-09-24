@@ -1,75 +1,45 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.UserDtos;
-using OnlineEducation.UI.Models;
 using OnlineEducation.UI.Services.UserServices;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class RoleAssignController(IUserService _userService, UserManager<AppUser> _userManager, RoleManager<AppRole> _roleManager) : Controller
+    public class RoleAssignController: Controller
     {
+        private readonly HttpClient _client;
+        private readonly IUserService _userService;
+
+        public RoleAssignController(IHttpClientFactory clientFactory, IUserService userService)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+            _userService = userService;
+        }
+
         public async Task<IActionResult> Index()
         {
-            var values = await _userService.GetAllUserAsync();
-            var userList = (from user in values
-                            select new UserViewModel
-                            {
-                                Id = user.Id,
-                                FullName = user.FirstName + " " + user.LastName,
-                                UserName = user.UserName,
-                                Roles = _userManager.GetRolesAsync(user).Result.ToList()
-                            }).ToList();
-            return View(userList);
+            var values = await _userService.GetAllUsersAsync();
+
+            return View(values);
         }
 
         [HttpGet]
         public async Task<IActionResult> AssignRole(int id)
         {
-            var user = await _userService.GetUserByIdAsync(id);
-            TempData["userId"] = user.Id;
-
-            var roles = await _roleManager.Roles.ToListAsync();
-
-            var userRoles = await _userManager.GetRolesAsync(user);
-
-            List<AssignRoleDto> assignRoleList = new List<AssignRoleDto>();
-
-            foreach (var role in roles)
-            {
-                var assignRole = new AssignRoleDto();
-                assignRole.RoleId = role.Id;
-                assignRole.RoleName = role.Name;
-                assignRole.RoleExist = userRoles.Contains(role.Name);
-
-                assignRoleList.Add(assignRole);
-            }
-            return View(assignRoleList);
+            var values = await _userService.GetUserForRoleAssign(id);
+            return View(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> AssignRole(List<AssignRoleDto> assignRoleDtoList)
         {
-            int userId = (int)TempData["userId"];
-            var user = await _userService.GetUserByIdAsync(userId);
+            var result = await _client.PostAsJsonAsync("roleAssigns", assignRoleDtoList);
 
-            foreach (var item in assignRoleDtoList)
-            {
+            if(!result.IsSuccessStatusCode)
+                return View(result);
 
-                if (item.RoleExist)
-                {
-                    await _userManager.AddToRoleAsync(user, item.RoleName);
-                }
-                else
-                {
-                    await _userManager.RemoveFromRoleAsync(user, item.RoleName);
-                }
-            }
             return RedirectToAction(nameof(Index));
         }
     }

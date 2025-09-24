@@ -1,19 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.TeacherSocialDtos;
-using OnlineEducation.UI.Helpers;
 using OnlineEducation.UI.Services.TokenServices;
-using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
-    [Authorize(Roles ="Teacher")]
-    public class MySocialMediaController(ITokenService _tokenService) : Controller
+    [Authorize(Roles = "Teacher")]
+    public class MySocialMediaController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly TokenService _tokenService;
+        public MySocialMediaController(IHttpClientFactory clientFactory, TokenService tokenService)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+            _tokenService = tokenService;
+        }
         public async Task<IActionResult> Index()
         {
             var userId = _tokenService.GetUserId;

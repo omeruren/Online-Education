@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.ViewComponents.Home
 {
-    public class _HomeCountDownComponent(IUserService _userService): ViewComponent
+    public class _HomeCountDownComponent : ViewComponent
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
-
+        private readonly HttpClient _client;
+        public _HomeCountDownComponent(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             ViewBag.blogCount = await _client.GetFromJsonAsync<int>("blogs/GetBlogCount");

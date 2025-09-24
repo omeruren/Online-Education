@@ -7,7 +7,12 @@ namespace OnlineEducation.UI.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public CourseController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IActionResult> Index()
         {
             var courses = await _client.GetFromJsonAsync<List<ResultCourseDto>>("courses");

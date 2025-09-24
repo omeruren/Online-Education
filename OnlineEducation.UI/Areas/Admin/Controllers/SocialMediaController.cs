@@ -10,9 +10,14 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
     [Area("Admin")]
     public class SocialMediaController : Controller
     {
-        
 
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+
+        private readonly HttpClient _client;
+
+        public SocialMediaController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IActionResult> Index()
         {
 
