@@ -18,6 +18,7 @@ Proje; Clean Architecture prensipleri ve best practices gözetilerek, UI, API, B
  
 OnlineEducation.sln
 │
+
 ├── OnlineEducation.API        → REST API (authentication, course, blog vb.)
 
 ├── OnlineEducation.UI         → Kullanıcı arayüzü
