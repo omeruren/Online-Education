@@ -5,9 +5,15 @@ using OnlineEducation.UI.Services.UserServices;
 
 namespace OnlineEducation.UI.Controllers
 {
-    public class RegisterController(IUserService _userService) : Controller
+    public class RegisterController: Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public RegisterController(IHttpClientFactory clientFactory)
+        {
+           _client = clientFactory.CreateClient("RensEduClient");
+        }
+
         public IActionResult SignUp()
         {
             return View();

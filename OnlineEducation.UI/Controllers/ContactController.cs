@@ -8,8 +8,12 @@ namespace OnlineEducation.UI.Controllers
 {
     public class ContactController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
 
+        public ContactController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IActionResult> Index()
         {
             var mapUrls = await _client.GetFromJsonAsync<List<ResultContactDto>>("contacts");

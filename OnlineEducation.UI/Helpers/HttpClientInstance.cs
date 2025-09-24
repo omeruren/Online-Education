@@ -1,7 +1,11 @@
-﻿namespace OnlineEducation.UI.Helpers
+﻿using OnlineEducation.UI.Services.TokenServices;
+using System.Net.Http.Headers;
+
+namespace OnlineEducation.UI.Helpers
 {
     public static class HttpClientInstance
     {
+       
 
         public static HttpClient CreateClient()
         {

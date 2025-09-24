@@ -6,6 +6,7 @@ using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.BlogCategoryDtos;
 using OnlineEducation.UI.DTOs.BlogDtos;
 using OnlineEducation.UI.Helpers;
+using OnlineEducation.UI.Services.TokenServices;
 using OnlineEducation.UI.Validators;
 using System.Threading.Tasks;
 
@@ -15,12 +16,13 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
     [Area("Admin")]
     public class BlogController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
-        private readonly UserManager<AppUser> _userManager;
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
 
-        public BlogController(UserManager<AppUser> userManager)
+        public BlogController(ITokenService tokenService, IHttpClientFactory clientFactory)
         {
-            _userManager = userManager;
+            _tokenService = tokenService;
+            _client = clientFactory.CreateClient("RensEduClient");
         }
 
         public async Task CategoryDropDown()
@@ -51,8 +53,8 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBlog(CreateBlogDto createBlogDto)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            createBlogDto.WriterId = user.Id;
+            var userId =  _tokenService.GetUserId;
+            createBlogDto.WriterId = userId;
             await _client.PostAsJsonAsync("blogs", createBlogDto);
             return RedirectToAction(nameof(Index));
         }

@@ -6,7 +6,12 @@ namespace OnlineEducation.UI.ViewComponents.UILayout
 {
     public class _UILayoutHeaderSocialComponent : ViewComponent
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public _UILayoutHeaderSocialComponent(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var values = await _client.GetFromJsonAsync<List<ResultSocialMediaDto>>("socialMedias");

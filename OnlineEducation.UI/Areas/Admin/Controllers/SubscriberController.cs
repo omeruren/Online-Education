@@ -11,7 +11,12 @@ namespace OnlineEducation.UI.Areas.Admin.Controllers
     {
 
 
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public SubscriberController(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IActionResult> Index()
         {
 

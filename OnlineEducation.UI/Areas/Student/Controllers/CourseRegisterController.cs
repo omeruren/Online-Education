@@ -14,9 +14,15 @@ namespace OnlineEducation.UI.Areas.Student.Controllers
 {
     [Area("Student")]
     [Authorize(Roles = "Student")]
-    public class CourseRegisterController(ITokenService _tokenService) : Controller
+    public class CourseRegisterController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
+        public CourseRegisterController(IHttpClientFactory clientFactory, ITokenService tokenService)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+            _tokenService = tokenService;
+        }
         public async Task<IActionResult> Index()
         {
             var userId =_tokenService.GetUserId;

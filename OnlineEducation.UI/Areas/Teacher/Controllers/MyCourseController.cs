@@ -16,13 +16,16 @@ namespace OnlineEducation.UI.Areas.Teacher.Controllers
     [Area("Teacher")]
     public class MyCourseController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
         private readonly ITokenService _tokenService;
 
-        public MyCourseController( ITokenService tokenService)
+        public MyCourseController(IHttpClientFactory clientFactory, ITokenService tokenService)
         {
+            _client = clientFactory.CreateClient("RensEduClient");
             _tokenService = tokenService;
         }
+
+
 
         public async Task<IActionResult> Index()
         {

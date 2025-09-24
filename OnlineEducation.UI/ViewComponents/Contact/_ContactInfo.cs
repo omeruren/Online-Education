@@ -7,7 +7,12 @@ namespace OnlineEducation.UI.ViewComponents.Contact
 {
     public class _ContactInfo : ViewComponent
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public _ContactInfo(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("RensEduClient");
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var values = await _client.GetFromJsonAsync<List<ResultContactDto>>("contacts");
