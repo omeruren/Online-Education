@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
@@ -7,10 +8,12 @@ using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Controllers
 {
+    [Authorize(Roles = "Admin, Teacher")]
     [Route("api/[controller]")]
     [ApiController]
     public class CourseCategoriesController(ICourseCategoryService _courseCategory, IMapper _mapper) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
@@ -63,12 +66,14 @@ namespace OnlineEducation.API.Controllers
             return Ok("Do not Showing on Home Page");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetActiveCategories")]
         public IActionResult GetActiveCategories()
         {
             var values = _courseCategory.TGetFilteredList(c => c.IsShown == true);
             return Ok(values);
         }
+        [AllowAnonymous]
         [HttpGet("GetCourseCategoryCount")]
         public IActionResult GetCourseCategoryCount()
         {

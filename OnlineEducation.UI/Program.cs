@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using OnlineEducation.DataAccess.Context;
 using OnlineEducation.Entity.Entities;
@@ -12,19 +13,21 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 
-builder.Services.AddDbContext<OnlineEducationContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
-}
-);
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<OnlineEducationContext>();
 builder.Services.AddHttpClient();
-builder.Services.ConfigureApplicationCookie(cfg =>
-{
-    cfg.LoginPath = "/Login/SignIn";
-    cfg.LogoutPath = "/Login/Logout";
-    cfg.AccessDeniedPath = "/ErrorPage/AccessDenied";
-});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddCookie(JwtBearerDefaults.AuthenticationScheme, options =>
+        {
+            options.LoginPath = "/Login/SignIn";
+            options.LogoutPath = "/Login/Logout";
+            options.AccessDeniedPath = "/ErrorPage/AccessDenied";
+            options.Cookie.SameSite = SameSiteMode.Strict;
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+            options.Cookie.Name = "RensEducationJWT";
+        });
+
+
 
 builder.Services.AddControllersWithViews();
 

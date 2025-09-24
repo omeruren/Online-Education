@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
@@ -7,10 +8,12 @@ using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Controllers
 {
+    [Authorize(Roles ="Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class AboutsController(IGenericService<About> _aboutService, IMapper _mapper) : Controller
     {
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {

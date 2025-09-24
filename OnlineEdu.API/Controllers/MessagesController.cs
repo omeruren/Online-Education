@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
@@ -7,6 +8,7 @@ using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class MessagesController(IGenericService<Message> _messageService, IMapper _mapper) : ControllerBase
@@ -32,6 +34,7 @@ namespace OnlineEducation.API.Controllers
             return Ok("Message entitiy deleted");
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Create(CreateMessageDto createMessageDto)
         {
