@@ -1,23 +1,20 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using NuGet.DependencyResolver;
+using OnlineEducation.Business.Abstract;
 using OnlineEducation.DataAccess.Context;
+using OnlineEducation.DTO.DTOs.UserDtos;
 using OnlineEducation.Entity.Entities;
-using OnlineEducation.UI.DTOs.UserDtos;
-using OnlineEducation.UI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace OnlineEducation.UI.Services.UserServices
+namespace OnlineEducation.Business.Concrete
 {
-    public class UserService: IUserService
+    public class UserService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, RoleManager<AppRole> _roleManager, IMapper _mapper, OnlineEducationContext _context) : IUserService
     {
-
-        private readonly HttpClient _client;
-
-        public UserService(IHttpClientFactory clientFactory)
-        {
-            _client = clientFactory.CreateClient("RensEduClient");
-        }
 
         public async Task<bool> AssignRoleAsync(List<AssignRoleDto> assignRoleDto)
         {
@@ -30,7 +27,7 @@ namespace OnlineEducation.UI.Services.UserServices
             throw new NotImplementedException();
         }
 
-        public async Task<IdentityResult> CreateUserAsync(UserRegisterDto userRegisterDto)
+        public async Task<IdentityResult> CreateUserAsync(RegisterDto userRegisterDto)
         {
             var user = new AppUser
             {
@@ -63,9 +60,9 @@ namespace OnlineEducation.UI.Services.UserServices
 
         }
 
-        public async Task<List<UserViewModel>> GetAllUsersAsync()
+        public async Task<List<AppUser>> GetAllUserAsync()
         {
-            return await _client.GetFromJsonAsync<List<UserViewModel>>("roleAssigns");
+            return await _userManager.Users.ToListAsync();
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -73,11 +70,11 @@ namespace OnlineEducation.UI.Services.UserServices
             return await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<string> LoginAsync(UserLoginDto userLoginDto)
+        public async Task<string> LoginAsync(LoginDto userLoginDto)
         {
             var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
             if (user == null) { return null; }
-            var result = await _signInManager.PasswordSignInAsync(user, userLoginDto.Passsword, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, userLoginDto.Password, false, false);
             if (!result.Succeeded) { return null; }
             var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
             if (isAdmin) { return "Admin"; }
@@ -107,12 +104,10 @@ namespace OnlineEducation.UI.Services.UserServices
         }
         public async Task LogoutAsync()
         {
-           await _signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
 
         }
-        public async Task<List<AssignRoleDto>> GetUserForRoleAssign(int id)
-        {
-            return await _client.GetFromJsonAsync<List<AssignRoleDto>>($"roleAssigns/{id}");
-        }
+
+       
     }
 }
