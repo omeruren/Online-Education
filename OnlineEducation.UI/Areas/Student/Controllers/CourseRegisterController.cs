@@ -7,20 +7,22 @@ using OnlineEducation.UI.DTOs.CourseDtos;
 using OnlineEducation.UI.DTOs.CourseRegisterDtos;
 using OnlineEducation.UI.DTOs.CourseVideoDtos;
 using OnlineEducation.UI.Helpers;
+using OnlineEducation.UI.Services.TokenServices;
 using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Student.Controllers
 {
     [Area("Student")]
     [Authorize(Roles = "Student")]
-    public class CourseRegisterController(UserManager<AppUser> _userManager) : Controller
+    public class CourseRegisterController(ITokenService _tokenService) : Controller
     {
         private readonly HttpClient _client = HttpClientInstance.CreateClient();
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userId =_tokenService.GetUserId;
 
-            var result = await _client.GetFromJsonAsync<List<ResultCourseRegisterDto>>($"courseRegisters/GetMyCourses/{user.Id}");
+
+            var result = await _client.GetFromJsonAsync<List<ResultCourseRegisterDto>>($"courseRegisters/GetMyCourses/{userId}");
             return View(result);
         }
 
@@ -48,8 +50,8 @@ namespace OnlineEducation.UI.Areas.Student.Controllers
                                    Text = c.CourseName,
                                    Value = c.CourseId.ToString()
                                }).ToList();
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            createCourseRegisterDto.AppUserId = user.Id;
+            var userId = _tokenService.GetUserId;
+            createCourseRegisterDto.AppUserId = userId;
             var result = await _client.PostAsJsonAsync("courseRegisters", createCourseRegisterDto);
 
             if (result.IsSuccessStatusCode)

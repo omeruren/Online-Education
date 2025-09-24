@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineEducation.DataAccess.Context;
 using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.Services.RoleServices;
+using OnlineEducation.UI.Services.TokenServices;
 using OnlineEducation.UI.Services.UserServices;
 using System.Reflection;
 
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddHttpClient();
 
