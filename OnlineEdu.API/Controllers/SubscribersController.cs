@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
@@ -7,6 +8,7 @@ using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SubscribersController(IGenericService<Subscriber> _subscriberService, IMapper _mapper) : ControllerBase
@@ -33,6 +35,7 @@ namespace OnlineEducation.API.Controllers
             return Ok("Subscriber entitiy deleted");
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Create(CreateSubscriberDto createSubscriberDto)
         {
@@ -49,6 +52,7 @@ namespace OnlineEducation.API.Controllers
             return Ok("Subscriber entitiy updated");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetSubscriberCount")]
         public IActionResult GetSubscriberCount()
         {

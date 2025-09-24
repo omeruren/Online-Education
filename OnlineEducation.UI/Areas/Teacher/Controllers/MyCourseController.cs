@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineEducation.Entity.Entities;
 using OnlineEducation.UI.DTOs.CourseCategoryDtos;
 using OnlineEducation.UI.DTOs.CourseDtos;
+using OnlineEducation.UI.DTOs.CourseVideoDtos;
 using OnlineEducation.UI.Helpers;
+using OnlineEducation.UI.Services.TokenServices;
 using System.Threading.Tasks;
 
 namespace OnlineEducation.UI.Areas.Teacher.Controllers
@@ -15,18 +17,19 @@ namespace OnlineEducation.UI.Areas.Teacher.Controllers
     public class MyCourseController : Controller
     {
         private readonly HttpClient _client = HttpClientInstance.CreateClient();
-        private readonly UserManager<AppUser> _userManager;
+        private readonly ITokenService _tokenService;
 
-        public MyCourseController(UserManager<AppUser> userManager)
+        public MyCourseController( ITokenService tokenService)
         {
-            _userManager = userManager;
+            _tokenService = tokenService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            var values = await _client.GetFromJsonAsync<List<ResultCourseDto>>("courses/GetCoursesByTeacherId/" + user.Id);
+            var userId = _tokenService.GetUserId;
+
+            var values = await _client.GetFromJsonAsync<List<ResultCourseDto>>("courses/GetCoursesByTeacherId/" + userId);
 
             return View(values);
         }
@@ -47,8 +50,8 @@ namespace OnlineEducation.UI.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCourse(CreateCourseDto createCourseDto)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            createCourseDto.AppUserId = user.Id;
+            var userId = _tokenService.GetUserId;
+            createCourseDto.AppUserId = userId;
             createCourseDto.IsShown = false;
             await _client.PostAsJsonAsync("courses", createCourseDto);
 
@@ -71,8 +74,8 @@ namespace OnlineEducation.UI.Areas.Teacher.Controllers
         }
         public async Task<IActionResult> UpdateCourse(UpdateCourseDto updateCourseDto)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            updateCourseDto.AppUserId = user.Id;
+            var userId = _tokenService.GetUserId;
+            updateCourseDto.AppUserId = userId;
             await _client.PutAsJsonAsync("courses", updateCourseDto);
             return View();
         }
@@ -81,6 +84,32 @@ namespace OnlineEducation.UI.Areas.Teacher.Controllers
         {
 
             await _client.DeleteAsync("courses/" + id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> CourseVideos(int id)
+        {
+
+            var values = await _client.GetFromJsonAsync<List<ResultCourseVideoDto>>($"courseVideos/GetCourseVideosByCourseId/{id}");
+            ViewBag.CourseName = values.Select(x => x.Course.CourseName).FirstOrDefault();
+            TempData["courseId"] = id;
+            return View(values);
+        }
+        [HttpGet]
+        public async Task<IActionResult> CreateVideo()
+        {
+            var courseId = (int)TempData["courseId"];
+            var course = await _client.GetFromJsonAsync<ResultCourseDto>($"courses/{courseId}");
+            ViewBag.courseName = course.CourseName;
+            ViewBag.courseId = course.CourseId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateVideo(CreateCourseVideoDto createCourseVideoDto)
+        {
+
+            await _client.PostAsJsonAsync("courseVideos", createCourseVideoDto);
             return RedirectToAction(nameof(Index));
         }
     }

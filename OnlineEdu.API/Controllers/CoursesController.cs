@@ -1,17 +1,20 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEducation.Business.Abstract;
-using OnlineEducation.DTO.DTOs.CourseDtos;
 using OnlineEducation.DTO.DTOs.CourseCategoryDtos;
+using OnlineEducation.DTO.DTOs.CourseDtos;
 using OnlineEducation.Entity.Entities;
 
 namespace OnlineEducation.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CoursesController(ICourseService _courseService, IMapper _mapper) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
@@ -20,6 +23,7 @@ namespace OnlineEducation.API.Controllers
             return Ok(courses);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -64,6 +68,7 @@ namespace OnlineEducation.API.Controllers
             return Ok("Do not Showing On Home Page");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetActiveCourses")]
 
         public IActionResult GetActiveCourses()
@@ -71,6 +76,7 @@ namespace OnlineEducation.API.Controllers
             var values = _courseService.TGetFilteredList(c => c.IsShown == true);
             return Ok(values);
         }
+
         [HttpGet("GetCoursesByTeacherId/{id}")]
 
         public IActionResult GetCoursesByTeacherId(int id)
@@ -80,6 +86,7 @@ namespace OnlineEducation.API.Controllers
             return Ok(mappedValues);
 
         }
+        [AllowAnonymous]
         [HttpGet("GetCourseCount")]
         public IActionResult GetCourseCount()
         {
@@ -87,6 +94,7 @@ namespace OnlineEducation.API.Controllers
             return Ok(courses);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetCoursesByCategoryId/{id}")]
 
         public IActionResult GetCoursesByCategoryId(int id)

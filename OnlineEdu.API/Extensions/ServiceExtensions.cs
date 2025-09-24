@@ -1,5 +1,6 @@
 ﻿using OnlineEducation.Business.Abstract;
 using OnlineEducation.Business.Concrete;
+using OnlineEducation.Business.Configurations;
 using OnlineEducation.DataAccess.Abstract;
 using OnlineEducation.DataAccess.Concrete;
 using OnlineEducation.DataAccess.Repositories;
@@ -8,7 +9,8 @@ namespace OnlineEducation.API.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void AddServiceExtensions(this IServiceCollection services) {
+        public static void AddServiceExtensions(this IServiceCollection services, IConfiguration configuration)
+        {
 
 
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
@@ -27,7 +29,10 @@ namespace OnlineEducation.API.Extensions
 
             services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
             services.AddScoped<IBlogCategoryService, BlogCategoryManager>();
+            
+            services.Configure<JwtTokenOptions>(configuration.GetSection("JsonWebTokenOptions"));
 
+            services.AddScoped<IJwtService, JwtService>();
         }
     }
 }
